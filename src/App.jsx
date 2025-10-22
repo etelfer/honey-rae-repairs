@@ -1,3 +1,11 @@
+
+import "./App.css"
+import { CustomerList } from "./components/customers/CustomerList"
+import { TicketList } from "./components/tickets/TicketList"
+
 export const App = () => {
-  return <div className="welcome">Welcome to your first React Application!</div>
+  return <>
+  {/* <TicketList /> */}
+  <CustomerList />
+  </>
 }
