@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getallEmployees } from "../../services/employeeService"
+import { getAllEmployees } from "../../services/employeeService"
 
 
 export const Ticket = ({ ticket }) => {
@@ -7,7 +7,7 @@ export const Ticket = ({ ticket }) => {
     const [assignedEmployee, setAssignedEmployee] = useState({})
 
     useEffect(() => {
-        getallEmployees().then((employeesArray) => {
+        getAllEmployees().then((employeesArray) => {
             setEmployees(employeesArray)
         })
     },[])
