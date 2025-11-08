@@ -5,18 +5,21 @@ import { Ticket } from "./Ticket.jsx"
 import { TicketFilter } from "./TicketFilter.jsx"
 
 
-export const TicketList = () => {
+export const TicketList = ({ currentUser }) => {
 
   const [allTickets, setAllTickets] = useState([])
   const [filteredTickets, setFilteredTickets] = useState([])
   const [showEmergencyOnly, setShowEmergencyOnly] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
 
-  useEffect(() => {
+  const getAndSetTickets = () => {
     getAllTickets().then((ticketsArray) => {
     setAllTickets(ticketsArray)
-    console.log("tickets set!")
   })
+}
+
+  useEffect(() => {
+    getAndSetTickets()
   }, []) //ONLY runs on initial render of component, is getting tickets using fetch in other module and putting them into an array to be used later.
 
     useEffect(() => {
@@ -46,7 +49,11 @@ setShowEmergencyOnly={setShowEmergencyOnly}
 setSearchTerm={setSearchTerm}/>
     <article className="tickets">
       {filteredTickets.map((ticketObj) => {
-        return <Ticket ticket={ticketObj}  key={ticketObj.id}/>
+        return <Ticket 
+        ticket={ticketObj}
+        currentUser={currentUser} 
+        getAndSetTickets={getAndSetTickets}
+        key={ticketObj.id}/>
       })}
     </article>
     </div>
